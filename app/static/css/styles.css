@@ -1,0 +1,82 @@
+/* Body styling */
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-image: url('/static/images/Library.jpg');/* Adjust path if needed */
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #3e3e3e;
+}
+
+/* Form container styling */
+.signup-container {
+    background-color: rgba(255, 245, 235, 0.9);
+    border-radius: 10px;
+    padding: 30px;
+    width: 350px;
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+    text-align: center;
+}
+
+.signup-container h1 {
+    font-size: 24px;
+    color: #4e4e4e;
+    margin-bottom: 20px;
+}
+
+/* Input field styling */
+.signup-container input[type="text"],
+.signup-container input[type="email"],
+.signup-container input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+    font-size: 14px;
+}
+
+/* Button styling */
+.signup-container button {
+    width: 100%;
+    padding: 10px;
+    background-color: #ff7e67;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+.signup-container button:hover {
+    background-color: #ff644e;
+}
+
+/* Style for the redirect message */
+.signup-redirect {
+    text-align: center;
+    margin-top: 10px;
+    font-size: 14px;
+    color: #5e5e5e;
+}
+
+/* Style for the login link */
+.signup-redirect .login-link {
+    color: #ff7e67; /* A subtle blue shade for the link */
+    text-decoration: none;
+    font-weight: bold;
+    margin-left: 5px;
+}
+
+.signup-redirect .login-link:hover {
+    text-decoration: underline;
+}
