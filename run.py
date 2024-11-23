@@ -119,7 +119,7 @@ def signup():
                 return redirect(url_for("login"))  
         else:
             error_message = "Passwords do not match!"
-            flash(error_message, 'danger')  # Flash the error message
+            flash(error_message, 'error')  # Flash the error message
             return render_template('signup.html')
 
     return render_template('signup.html')
@@ -137,6 +137,7 @@ def login():
             return redirect(url_for("home"))
         else:
             flash("Wrong Username or Password. Please Try Again!", category="error")
+            return redirect(url_for("login"))
     
     return render_template("login.html")
 

@@ -12,9 +12,23 @@
     <div class="login-container">
         <h1>Welcome Back to BookVault</h1>
         <!-- Displaying error message if credentials are incorrect -->
-        {% if error %}
-        <p style="color: red;">{{ error }}</p>
-        {% endif %}
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                <div class="flash-messages">
+                    <ul>
+                        {% for category, message in messages %}
+                            <li class="flash {{ category }}">{{ message }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            {% endif %}
+        {% endwith %}
+        
+        <div class="error-message">
+            {% if error_message %}
+              <p style="color: red;">{{ error_message }}</p>
+            {% endif %}
+        </div>
 
         <!-- Login Form -->
         <form method="POST">

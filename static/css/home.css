@@ -143,6 +143,44 @@ nav ul li a:active::after {
     color: #fff;
 }
 
-
+  
+  /* Flash Messages Styling */
+  .flash-messages {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    position: absolute;
+    top: 80px; /* Adjust as needed based on the navbar height */
+    left: 0;
+    z-index: 10;
+    animation: fadeOut 5s forwards; /* Fade out after 3 seconds */
+  }
+  
+  .flash {
+    padding: 10px 20px;
+    border-radius: 8px;
+    margin: 10px;
+    font-weight: bold;
+    font-size: 16px;
+    color: #fff;
+    background-color: rgba(0, 0, 0, 0.7); /* Dark semi-transparent background */
+    opacity: 1;
+    text-align: center;
+    max-width: 80%; /* Limits width for readability */
+  }
+  
+  /* Success, Error, and Info styles */
+  .flash.success { background-color: #4caf50; } /* Green */
+  .flash.error { background-color: #f44336; } /* Red */
+  .flash.info { background-color: #2196f3; } /* Blue */
+  
+  /* Fade-out Animation */
+  @keyframes fadeOut {
+    0% { opacity: 1; }
+    80% { opacity: 1; }
+    100% { opacity: 0; visibility: hidden; }
+  }
+  
 
 
