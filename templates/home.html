@@ -17,8 +17,13 @@
                     <li><a href="{{ url_for('reading_status') }}">Reading Status</a></li>
                     <li><a href="{{ url_for('completed_books') }}">Completed Books</a></li>
                     <li><a href="{{ url_for('wishlist') }}">Wishlist</a></li>
-                    <li><a href="{{ url_for('login') }}">Login</a></li> <!-- Login link added here -->
-                    <li><a href="{{ url_for('signup') }}">Sign Up</a></li> <!-- Sign Up link added here -->
+                    {% if current_user.is_authenticated %}
+                        <li><a href="#">{{ current_user.username }}</a></li>
+                        <li><a href="{{ url_for('logout') }}">Logout</a></li>
+                    {% else %}
+                        <li><a href="{{ url_for('login') }}">Login</a></li>
+                        <li><a href="{{ url_for('signup') }}">Sign Up</a></li>
+                    {% endif %}
                 </ul>
             </nav>
         </div>
