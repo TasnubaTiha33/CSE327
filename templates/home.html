@@ -7,27 +7,8 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/home.css') }}">
 </head>
 <body>
-    <!-- Header with navigation buttons -->
-    <header>
-        <div class="header-container">
-            <nav>
-                <ul>
-                    <li><a href="{{ url_for('home') }}">Home</a></li>
-                    <li><a href="{{ url_for('book_list') }}">Book List</a></li>
-                    <li><a href="{{ url_for('reading_status') }}">Reading Status</a></li>
-                    <li><a href="{{ url_for('completed_books') }}">Completed Books</a></li>
-                    <li><a href="{{ url_for('wishlist') }}">Wishlist</a></li>
-                    {% if current_user.is_authenticated %}
-                        <li><a href="#">{{ current_user.username }}</a></li>
-                        <li><a href="{{ url_for('logout') }}">Logout</a></li>
-                    {% else %}
-                        <li><a href="{{ url_for('login') }}">Login</a></li>
-                        <li><a href="{{ url_for('signup') }}">Sign Up</a></li>
-                    {% endif %}
-                </ul>
-            </nav>
-        </div>
-    </header>
+    <!-- Include Header  -->
+    {% include 'header.html' %}
 
     <!-- Flash Messages Section -->
     {% with messages = get_flashed_messages(with_categories=true) %}

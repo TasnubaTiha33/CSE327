@@ -34,22 +34,6 @@ body {
     text-overflow: ellipsis; /* Adds '...' if the text overflows */
 }
 
-/* Header styling */
-header {
-    background-color: rgba(0, 0, 0, 0.5); /* Transparent dark overlay */
-    padding: 15px;
-    width: 100%;
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: 1000;
-}
-
-.header-container {
-    display: flex;
-    justify-content: flex-start; /* Aligns buttons to the left */
-    align-items: center;
-}
 
 nav ul {
     list-style: none;
