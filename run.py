@@ -1,29 +1,3 @@
-# from flask import Flask, render_template, request, redirect, url_for, flash
-# import mysql.connector
-# from mysql.connector import Error
-# from werkzeug.security import generate_password_hash
-
-# app = Flask(__name__)
-
-# # Set a secret key for session and flash messaging
-# app.secret_key = 'your_secret_key'  # Replace with a secure key
-
-# # Database connection function
-# def get_db_connection():
-#     try:
-#         conn = mysql.connector.connect(
-#             host='localhost',
-#             user='root',  # your MySQL username
-#             password='',  # your MySQL password
-#             database='bookvault_db'  # replace with your database name
-#         )
-#         if conn.is_connected():
-#             print("Connected to the database")
-#         return conn
-#     except Error as e:
-#         print(f"Error: {e}")
-#         return None
-
 import pymysql
 pymysql.install_as_MySQLdb()
 
@@ -77,29 +51,9 @@ def signup():
         confirm_password = request.form.get('confirm_password')
 
         if password == confirm_password:
-            # Hashing password using pbkdf2:sha256
+
             hashed_password = generate_password_hash(password, method='pbkdf2:sha256')
             
-            # # Connect to the database and insert the new user data
-            # conn = get_db_connection()
-            # if conn:
-            #     cursor = conn.cursor()
-            #     query = "INSERT INTO users (username, email, password) VALUES (%s, %s, %s)"
-            #     values = (username, email, hashed_password)
-            #     cursor.execute(query, values)
-            #     conn.commit()
-            #     print(f"User {username} added to the database")
-            #     cursor.close()
-            #     conn.close()
-
-            #     # Flash success message and redirect to login page
-            #     flash('You have successfully signed up! Please log in.', 'success')
-            #     return redirect(url_for('login'))
-            # else:
-            #     error_message = "Could not connect to the database."
-            #     flash(error_message, 'danger')  # Flash the error message
-            #     return render_template('signup.html')
-
             existing_user_email = User.query.filter_by(email=email).first()
             existing_user_username = User.query.filter_by(username=username).first()
             
