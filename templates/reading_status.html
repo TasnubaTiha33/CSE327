@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reading Status</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/reading_status.css') }}">
+</head>
+<body>
+    {% include 'header.html' %}
+    <!-- Flash Messages -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            <div class="flash-messages">
+                <ul>
+                    {% for category, message in messages %}
+                        <li class="flash {{ category }}">{{ message }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        {% endif %}
+    {% endwith %}
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <!-- Add Book Button -->
+        <div class="add-book-container">
+            <a href="{{ url_for('add_book') }}" class="add-book-button">Add Book</a>
+        </div>
+
+        <!-- Page Heading -->
+        <h1>Reading Status</h1>
+
+        <!-- Reading Status Table -->
+        <table>
+            <thead>
+                <tr>
+                    <th>Book Name</th>
+                    <th>Writer's Name</th>
+                    <th>Track</th>
+                </tr>
+            </thead>
+            
+        </table>
+        <button class="submit-button" onclick="saveProgress()">Save Progress</button>
+    </div>
+
+    <script>
+        // Update progress dynamically
+        function updateValue(slider, bookId) {
+            slider.nextElementSibling.textContent = slider.value + '%';
+            if (slider.value == 100) {
+                fetch(`/complete_book/${bookId}`, { method: 'POST' })
+                    .then(response => location.reload());
+            }
+        }
+
+        // Save progress for all books
+        function saveProgress() {
+            const progresses = [...document.querySelectorAll('.progress-bar')].map(slider => ({
+                bookId: slider.getAttribute('data-book-id'),
+                progress: slider.value
+            }));
+            fetch('/save_progress', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(progresses)
+            }).then(response => location.reload());
+        }
+    </script>
+</body>
+</html>

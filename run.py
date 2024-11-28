@@ -5,6 +5,7 @@ from flask import Flask, render_template, redirect, url_for, flash, request, ses
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
 from werkzeug.security import generate_password_hash, check_password_hash
+from sqlalchemy.sql import text
 from datetime import timedelta
 
 app = Flask(__name__)
@@ -99,9 +100,67 @@ def login():
 def book_list():
     return "Book List Page"
 
+
+@app.route('/add_book', methods=['GET', 'POST'])
+@login_required
+def add_book():
+    if request.method == 'POST':
+        book_id = request.form.get('book_id')  # Get selected book ID from the form
+
+        if not book_id:
+            flash("No book selected!", category="error")
+            return redirect(url_for('add_book'))
+
+        # Check if the book is already in the user's list
+        existing_entry = db.session.execute(
+            text("SELECT * FROM user_books WHERE user_id = :user_id AND book_id = :book_id"),
+            {"user_id": current_user.user_id, "book_id": book_id}
+        ).fetchone()
+
+        if existing_entry:
+            flash("This book is already in your list!", category="error")
+        else:
+            # Add the book to user_books
+            db.session.execute(
+                text("""
+                    INSERT INTO user_books (user_id, book_id, reading_progress, completed, wishlist)
+                    VALUES (:user_id, :book_id, 0, FALSE, FALSE)
+                """),
+                {"user_id": current_user.user_id, "book_id": book_id}
+            )
+            db.session.commit()
+            flash("Book successfully added to your list!", category="success")
+
+        return redirect(url_for('reading_status'))
+
+    return render_template('add_book.html')
+
+
+@app.route('/search_books', methods=['GET'])
+@login_required
+def search_books():
+    query = request.args.get('query', '').strip()
+
+    if not query:
+        return {"books": []}  # Empty response if query is empty
+
+    # Query matching books from the database
+    books = db.session.execute(
+        text("SELECT book_id, book_name, writer_name FROM book_list WHERE book_name LIKE :query LIMIT 5"),
+        {"query": f"%{query}%"}
+    ).fetchall()
+
+    # Convert the result into JSON format
+    books_list = [{"id": book.book_id, "name": book.book_name, "writer": book.writer_name} for book in books]
+    return {"books": books_list}
+
+
+
 @app.route('/reading_status')
+@login_required
 def reading_status():
-    return "Reading Status Page"
+    
+    return render_template('reading_status.html')
 
 @app.route('/completed_books')
 def completed_books():
