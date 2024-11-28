@@ -8,6 +8,7 @@
 </head>
 <body>
     {% include 'header.html' %}
+    
     <!-- Flash Messages -->
     {% with messages = get_flashed_messages(with_categories=true) %}
         {% if messages %}
@@ -21,7 +22,6 @@
         {% endif %}
     {% endwith %}
 
-    <!-- Main Content -->
     <div class="main-content">
         <!-- Add Book Button -->
         <div class="add-book-container">
@@ -40,33 +40,63 @@
                     <th>Track</th>
                 </tr>
             </thead>
-            
+            <tbody>
+                {% for book in user_books %}
+                <tr>
+                    <td>{{ book.book_name }}</td>
+                    <td>{{ book.writer_name }}</td>
+                    <td>
+                        <div class="progress-container">
+                            <input type="range" 
+                                   min="0" 
+                                   max="100" 
+                                   value="{{ book.reading_progress }}" 
+                                   class="progress-bar" 
+                                   data-book-id="{{ book.user_book_id }}"
+                                   onchange="updateValue(this)">
+                            <span class="progress-value">{{ book.reading_progress }}%</span>
+                        </div>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
         </table>
         <button class="submit-button" onclick="saveProgress()">Save Progress</button>
     </div>
 
     <script>
         // Update progress dynamically
-        function updateValue(slider, bookId) {
+        function updateValue(slider) {
             slider.nextElementSibling.textContent = slider.value + '%';
-            if (slider.value == 100) {
-                fetch(`/complete_book/${bookId}`, { method: 'POST' })
-                    .then(response => location.reload());
-            }
         }
-
+    
         // Save progress for all books
         function saveProgress() {
             const progresses = [...document.querySelectorAll('.progress-bar')].map(slider => ({
-                bookId: slider.getAttribute('data-book-id'),
+                book_id: slider.getAttribute('data-book-id'),
                 progress: slider.value
             }));
+    
             fetch('/save_progress', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(progresses)
-            }).then(response => location.reload());
+                body: JSON.stringify({ progresses })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.status === "success") {
+                    alert('Progress saved successfully!');
+                    location.reload();  // Reload the page to reflect changes
+                } else {
+                    alert('Failed to save progress.');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('An error occurred while saving progress.');
+            });
         }
     </script>
+    
 </body>
 </html>

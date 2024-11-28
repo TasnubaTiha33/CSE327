@@ -6,6 +6,7 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
 from werkzeug.security import generate_password_hash, check_password_hash
 from sqlalchemy.sql import text
+from flask import jsonify
 from datetime import timedelta
 
 app = Flask(__name__)
@@ -155,12 +156,86 @@ def search_books():
     return {"books": books_list}
 
 
-
 @app.route('/reading_status')
 @login_required
 def reading_status():
-    
-    return render_template('reading_status.html')
+    # Query to fetch books the user is reading and exclude completed (100%) books
+    books = db.session.execute(
+        text("""
+            SELECT 
+                ub.user_book_id,
+                b.book_name, 
+                b.writer_name, 
+                ub.reading_progress, 
+                ub.completed
+            FROM user_books ub
+            JOIN book_list b ON ub.book_id = b.book_id
+            WHERE ub.user_id = :user_id AND ub.reading_progress < 100
+        """),
+        {"user_id": current_user.user_id}
+    ).fetchall()
+
+    # Convert the result into a format suitable for rendering in HTML
+    user_books = [
+        {
+            "user_book_id": book.user_book_id,
+            "book_name": book.book_name,
+            "writer_name": book.writer_name,
+            "reading_progress": book.reading_progress,
+            "completed": book.completed
+        }
+        for book in books
+    ]
+
+    return render_template('reading_status.html', user_books=user_books)
+
+
+
+
+@app.route('/save_progress', methods=['POST'])
+@login_required
+def save_progress():
+    data = request.get_json()
+    progresses = data.get('progresses', [])
+
+    try:
+        for progress in progresses:
+            db.session.execute(
+                text("""
+                    UPDATE user_books
+                    SET reading_progress = :progress, completed = :completed
+                    WHERE user_book_id = :book_id AND user_id = :user_id
+                """),
+                {
+                    "progress": progress['progress'],
+                    "completed": progress['progress'] == '100',
+                    "book_id": progress['book_id'],
+                    "user_id": current_user.user_id
+                }
+            )
+        db.session.commit()
+        return jsonify({"status": "success"})
+    except Exception as e:
+        db.session.rollback()
+        return jsonify({"status": "error", "message": str(e)}), 500
+
+
+
+@app.route('/complete_book/<int:book_id>', methods=['POST'])
+@login_required
+def complete_book(book_id):
+    # Mark the book as completed
+    db.session.execute(
+        text("""
+            UPDATE user_books
+            SET completed = TRUE, reading_progress = 100
+            WHERE user_book_id = :book_id AND user_id = :user_id
+        """),
+        {"book_id": book_id, "user_id": current_user.user_id}
+    )
+    db.session.commit()
+    flash("Book marked as completed!", category="success")
+    return {"message": "Book marked as completed"}, 200
 
 @app.route('/completed_books')
 def completed_books():
