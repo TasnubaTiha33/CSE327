@@ -3,7 +3,8 @@ pymysql.install_as_MySQLdb()
 
 from flask import Flask, render_template, redirect, url_for, flash, request, session
 from flask_sqlalchemy import SQLAlchemy
-from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
+from flask_login import LoginManager, UserMixin, login_user
+from flask_login import login_required, logout_user, current_user
 from werkzeug.security import generate_password_hash, check_password_hash
 from sqlalchemy.sql import text
 from flask import jsonify
@@ -24,7 +25,12 @@ login_manager.login_view = "login"
 login_manager.login_message = "Please log in to access this page."
 login_manager.login_message_category = "error"  
 
-# User model for Flask-Login
+"""
+User Model
+------------------------------------------------
+User model for Flask-Login
+
+"""
 class User(UserMixin, db.Model):
     __tablename__ = 'users'
     user_id = db.Column(db.Integer, primary_key=True)
@@ -39,11 +45,24 @@ class User(UserMixin, db.Model):
 def load_user(user_id):
     return User.query.get(int(user_id))
 
+"""
+Homepage
+------------------------------------------------
+Homepage from where we can visit other pages
+
+"""
 @app.route('/')
 def home():
     print("Home route is working!")
     return render_template('home.html')
 
+
+"""
+Signup 
+------------------------------------------------
+User will create his/her account using the form of signup
+
+"""
 @app.route('/signup', methods=['GET', 'POST'])
 def signup():
     if request.method == 'POST':
@@ -80,6 +99,13 @@ def signup():
 
     return render_template('signup.html')
 
+"""
+Login 
+---------------------------------------
+After creating an account user will login to use the features of our website
+
+"""
+
 @app.route("/login", methods=["GET", "POST"])
 def login():
     if request.method == "POST":
@@ -98,13 +124,19 @@ def login():
     return render_template("login.html")
 
 @app.route('/book_list')
-def book_list():
+def bookList():
     return "Book List Page"
 
 
+"""
+Add
+------------------------------------------------
+User will add a book he want to start reading
+
+"""
 @app.route('/add_book', methods=['GET', 'POST'])
 @login_required
-def add_book():
+def addBook():
     if request.method == 'POST':
         book_id = request.form.get('book_id')  # Get selected book ID from the form
 
@@ -121,7 +153,7 @@ def add_book():
         if existing_entry:
             flash("This book is already in your list!", category="error")
         else:
-            # Add the book to user_books
+            # Add the book the user has selected to user_books
             db.session.execute(
                 text("""
                     INSERT INTO user_books (user_id, book_id, reading_progress, completed, wishlist)
@@ -132,14 +164,19 @@ def add_book():
             db.session.commit()
             flash("Book successfully added to your list!", category="success")
 
-        return redirect(url_for('reading_status'))
+        return redirect(url_for('readingStatus'))
 
     return render_template('add_book.html')
 
+"""
+Search books
+------------------------------------------------
+Before adding a book user will search a book he wants to read
 
+"""
 @app.route('/search_books', methods=['GET'])
 @login_required
-def search_books():
+def searchBooks():
     query = request.args.get('query', '').strip()
 
     if not query:
@@ -152,13 +189,20 @@ def search_books():
     ).fetchall()
 
     # Convert the result into JSON format
-    books_list = [{"id": book.book_id, "name": book.book_name, "writer": book.writer_name} for book in books]
+    books_list = [{"id": book.book_id, "name": book.book_name, "writer": book.writer_name}
+                   for book in books]
     return {"books": books_list}
 
 
+"""
+Reading Status
+------------------------------------------------
+In this page user can go to add book page. Also user can 
+check and update the progress of books he/she is currently reading 
+"""
 @app.route('/reading_status')
 @login_required
-def reading_status():
+def readingStatus():
     # Query to fetch books the user is reading and exclude completed (100%) books
     books = db.session.execute(
         text("""
@@ -191,10 +235,15 @@ def reading_status():
 
 
 
-
+"""
+Save Progress
+------------------------------------------------
+It is a part of the Reading Status page. Here, the user 
+can save the progress of his currently reading books.
+"""
 @app.route('/save_progress', methods=['POST'])
 @login_required
-def save_progress():
+def saveProgress():
     data = request.get_json()
     progresses = data.get('progresses', [])
 
@@ -220,10 +269,17 @@ def save_progress():
         return jsonify({"status": "error", "message": str(e)}), 500
 
 
-
+"""
+Complete Book
+------------------------------------------------
+It is also a part of the Reading Status page. So, if the user clicks on save Progress 
+where the progress of a book is 100 percent then the user has completed the particular book. 
+As a result, it will be marked as completed in our database and we can not 
+see the book in the reading progress.
+"""
 @app.route('/complete_book/<int:book_id>', methods=['POST'])
 @login_required
-def complete_book(book_id):
+def completeBook(book_id):
     # Mark the book as completed
     db.session.execute(
         text("""
@@ -238,13 +294,18 @@ def complete_book(book_id):
     return {"message": "Book marked as completed"}, 200
 
 @app.route('/completed_books')
-def completed_books():
+def completedBooks():
     return "Completed Books Page"
 
 @app.route('/wishlist')
 def wishlist():
     return "Wishlist Page"
 
+"""
+Logout
+------------------------------------------------
+User can log out whenever he want
+"""
 @app.route("/logout")
 @login_required
 def logout():

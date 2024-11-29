@@ -11,9 +11,9 @@
             <nav>
                 <ul>
                     <li><a href="{{ url_for('home') }}">Home</a></li>
-                    <li><a href="{{ url_for('book_list') }}">Book List</a></li>
-                    <li><a href="{{ url_for('reading_status') }}">Reading Status</a></li>
-                    <li><a href="{{ url_for('completed_books') }}">Completed Books</a></li>
+                    <li><a href="{{ url_for('bookList') }}">Book List</a></li>
+                    <li><a href="{{ url_for('readingStatus') }}">Reading Status</a></li>
+                    <li><a href="{{ url_for('completedBooks') }}">Completed Books</a></li>
                     <li><a href="{{ url_for('wishlist') }}">Wishlist</a></li>
                     {% if current_user.is_authenticated %}
                         <li><a href="#">{{ current_user.username }}</a></li>
