@@ -23,3 +23,12 @@
 - **SQLAlchemy** for database management
 - **MySQL** for database storage
 - **HTML/CSS** for frontend design
+
+## Authors
+This project was created by the following team members:
+
+Tasnuba Islam (2012848042)
+Fiaz Al Abid (2111096642)
+Miftahul Jannat (2112276642)
+Eershan Reza Khan (2131804642)
+Md Sayedul Karim Sikder (2111494642)
