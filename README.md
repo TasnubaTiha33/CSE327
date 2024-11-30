@@ -8,6 +8,7 @@
 - **Track reading progress**
 - **Rate and review books**
 - **Share books with others**
+- **Create their customized Wishlist**
 
 ## Tools Used
 Here are the tools used in the development of **Book Vault**:
