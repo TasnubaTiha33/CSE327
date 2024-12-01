@@ -15,21 +15,26 @@
 
 The following tools and technologies were used to build **BookVault**:
 
-- **Base Language**:
-  - ![Python](https://upload.wikimedia.org/wikipedia/commons/c/c3/Python-logo-notext.svg) [Python](https://www.python.org/) - The primary programming language used for developing the backend of the application.
+## Tech Stack
 
-- **Backend**: 
-  - ![Flask](https://upload.wikimedia.org/wikipedia/commons/thumb/0/0e/Flask_logo.svg/1024px-Flask_logo.svg.png) [Flask](https://flask.palletsprojects.com/) - Lightweight web framework for Python
-  - ![MySQL](https://upload.wikimedia.org/wikipedia/commons/thumb/d/d3/MySQL_logo.svg/800px-MySQL_logo.svg.png) [MySQL](https://www.mysql.com/) - Database for storing books, user information, reviews, and ratings.
-  - ![SQLAlchemy](https://upload.wikimedia.org/wikipedia/commons/thumb/8/8f/SQLAlchemy_logo.png/600px-SQLAlchemy_logo.png) [SQLAlchemy](https://www.sqlalchemy.org/) - ORM for database interactions in Flask.
+The following tools and technologies were used to build **BookVault**:
+
+- **Base Language**:
+  - ![Python](https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Python-logo-notext.svg/1024px-Python-logo-notext.svg.png) [Python](https://www.python.org/) - The primary programming language used for developing the backend of the application.
+
+- **Backend**:
+  - ![Flask](https://upload.wikimedia.org/wikipedia/commons/thumb/c/cd/Flask_logo.svg/800px-Flask_logo.svg.png) [Flask](https://flask.palletsprojects.com/) - Lightweight web framework for Python.
+  - ![MySQL](https://upload.wikimedia.org/wikipedia/commons/thumb/4/47/MySQL_logo.svg/800px-MySQL_logo.svg.png) [MySQL](https://www.mysql.com/) - Database for storing books, user information, reviews, and ratings.
+  - ![SQLAlchemy](https://upload.wikimedia.org/wikipedia/commons/1/19/SQLAlchemy_logo.png) [SQLAlchemy](https://www.sqlalchemy.org/) - ORM for database interactions in Flask.
 
 - **Frontend**:
-  - ![HTML](https://upload.wikimedia.org/wikipedia/commons/7/77/HTML5_logo.svg) [HTML](https://html.com/) - Standard markup language for creating web pages.
-  - ![CSS](https://upload.wikimedia.org/wikipedia/commons/6/62/CSS3_logo.svg) [CSS](https://www.w3.org/Style/CSS/) - Styling language for the design of web pages.
+  - ![HTML](https://upload.wikimedia.org/wikipedia/commons/thumb/5/5d/HTML5_logo_and_wordmark.svg/800px-HTML5_logo_and_wordmark.svg.png) [HTML](https://html.com/) - Standard markup language for creating web pages.
+  - ![CSS](https://upload.wikimedia.org/wikipedia/commons/thumb/6/6a/CSS3_logo.svg/800px-CSS3_logo.svg.png) [CSS](https://www.w3.org/Style/CSS/) - Styling language for the design of web pages.
 
 - **Libraries/Tools**:
   - ![Git](https://git-scm.com/images/logos/downloads/Git-Logo-2X.png) [Git](https://git-scm.com/) - Version control system for managing project source code.
   - ![GitHub](https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/Octicons-mark-github.svg/120px-Octicons-mark-github.svg.png) [GitHub](https://github.com/) - Git repository hosting service.
+
 
 
 ## Authors
