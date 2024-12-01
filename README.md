@@ -55,3 +55,42 @@ To get started with **BookVault**, follow these steps:
 1. **Clone the repository**:
    ```bash
    git clone https://github.com/TasnubaTiha33/CSE327.git
+
+## Setup Instructions
+
+To get started with **BookVault**, follow these steps:
+
+### 2. Install Dependencies
+
+Navigate to the project directory and run the following command to install the required Python packages:
+
+```bash
+pip install -r requirements.txt
+
+### 3. Set Up Database
+
+1. **Configure your MySQL database** with the necessary tables for your application.
+
+2. **Update the database credentials** in the `config.py` file:
+   - Set the correct **host** for your MySQL server.
+   - Enter your **username** and **password** for database authentication.
+   - Specify the **database name** you want to use for the project.
+
+Example:
+
+```python
+class Config:
+    DB_HOST = 'localhost'  # Host for the MySQL server
+    DB_USER = 'your_username'  # MySQL username
+    DB_PASSWORD = 'your_password'  # MySQL password
+    DB_NAME = 'bookvault_db'  # Database name
+
+### 4. Run the Application
+
+After setting up the database, run the Flask application with the following command:
+
+```bash
+python app.py
+
+This will start the Flask development server. Once the server is running, you can access the application by visiting [http://127.0.0.1:5000](http://127.0.0.1:5000) in your web browser.
+
