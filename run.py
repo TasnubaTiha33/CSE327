@@ -279,7 +279,7 @@ see the book in the reading progress.
 """
 @app.route('/complete_book/<int:book_id>', methods=['POST'])
 @login_required
-def completeBook(book_id):
+def complete_book(book_id):
     # Mark the book as completed
     db.session.execute(
         text("""
@@ -293,13 +293,78 @@ def completeBook(book_id):
     flash("Book marked as completed!", category="success")
     return {"message": "Book marked as completed"}, 200
 
-@app.route('/completed_books')
-def completedBooks():
-    return "Completed Books Page"
 
-@app.route('/wishlist')
+
+@app.route('/completed_books')
+@login_required
+def completedBooks():
+    # Query to fetch completed books for the logged-in user
+    completedBooks = db.session.execute(
+        text("""
+            SELECT 
+                b.book_name, 
+                b.writer_name, 
+                b.genre 
+            FROM user_books ub
+            JOIN book_list b ON ub.book_id = b.book_id
+            WHERE ub.user_id = :user_id AND ub.completed = TRUE
+        """),
+        {"user_id": current_user.user_id}
+    ).fetchall()
+
+    # Convert the result into a format suitable for rendering in HTML
+    userCompletedBooks = [
+        {
+            "bookName": book.book_name,
+            "writerName": book.writer_name,
+            "genre": book.genre,
+        }
+        for book in completedBooks
+    ]
+
+    return render_template('completed_books.html', completedBooks=userCompletedBooks)
+
+
+
+from flask import request, redirect, url_for, flash
+
+@app.route('/wishlist', methods=['GET', 'POST'])
+@login_required
 def wishlist():
-    return "Wishlist Page"
+    if request.method == 'POST':
+        # Handle adding book to wishlist
+        data = request.get_json()
+        bookId = data.get('book_id')
+        
+        if bookId:
+            db.session.execute(
+                text("""INSERT INTO user_books (user_id, book_id, wishlist) 
+                        VALUES (:user_id, :book_id, TRUE)"""),
+                {"user_id": current_user.user_id, "book_id": bookId}
+            )
+            db.session.commit()
+            return jsonify({"status": "success"})
+    
+    # Fetch user's wishlist books (GET request)
+    wishlistBooks = db.session.execute(
+        text("""
+            SELECT b.book_name, b.writer_name
+            FROM user_books ub
+            JOIN book_list b ON ub.book_id = b.book_id
+            WHERE ub.user_id = :user_id AND ub.wishlist = TRUE
+        """),
+        {"user_id": current_user.user_id}
+    ).fetchall()
+
+    # Convert to a list of dictionaries for easier rendering
+    wishlistBooksList = [{"bookName": book.book_name, "writerName": book.writer_name}
+                         for book in wishlistBooks]
+
+    return render_template('wishlist.html', wishlistBooks=wishlistBooksList)
+
+
+
+
 
 """
 Logout
@@ -316,5 +381,3 @@ def logout():
 if __name__ == '__main__':
     print("Starting Flask app...")
     app.run(debug=True)
-
-

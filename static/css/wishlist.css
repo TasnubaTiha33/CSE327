@@ -1,0 +1,221 @@
+/* General Reset */
+body, html {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Arial', sans-serif;
+    height: 100%;
+}
+
+/* Background Styling */
+body {
+    background-image: url('/static/images/BG4.png');
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    color: #fff;
+}
+
+/* Content Wrapper */
+.main-content {
+    width: 90%;
+    max-width: 800px; /* Increased max-width for larger screens */
+    background-color: rgba(143, 66, 125, 0.8);
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(141, 91, 125, 0.57);
+    text-align: center;
+    margin-top: 70px;
+}
+
+/* Page Heading */
+h1 {
+    font-size: 1.8rem;
+    color: #daed09;
+    margin-bottom: 15px;
+}
+
+/* Wishlist Table */
+table {
+    width: 100%;
+    margin-top: 20px;
+    border-collapse: collapse;
+}
+
+table th, table td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+table th {
+    background-color: #208085;
+    color: #fff;
+}
+
+table td {
+    background-color: #2e7b7a;
+    color: #fff;
+}
+
+table td button {
+    background-color: #f3c41a;
+    border: none;
+    color: white;
+    padding: 6px 12px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 0.9rem;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+table td button:hover {
+    background-color: #43d9be;
+}
+
+/* Add to Wishlist Section */
+.add-to-wishlist-section {
+    margin-top: 20px;
+    display: none;
+    background-color: rgba(143, 66, 125, 0.9);
+    padding: 15px;
+    border-radius: 8px;
+    text-align: left;
+}
+
+.add-to-wishlist-section.visible {
+    display: block;
+}
+
+#book-search {
+    width: 100%;
+    padding: 8px;
+    font-size: 1rem;
+    margin-bottom: 10px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+}
+
+#suggestions {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    max-height: 150px;
+    overflow-y: auto;
+    background-color: #fff;
+    color: #000;
+    margin-top: 10px;
+}
+
+#suggestions li {
+    padding: 8px;
+    cursor: pointer;
+}
+
+#suggestions li:hover {
+    background-color: #ddd;
+}
+
+/* Add to Wishlist Button */
+.add-to-wishlist-btn {
+    margin-top: 20px;
+    padding: 10px 20px;
+    font-size: 1.1rem;
+    color: #fff;
+    background-color: #f0d909; /* Teal color */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.add-to-wishlist-btn:hover {
+    background-color: #43d9be; /* Darker teal on hover */
+    transform: scale(1.05);
+}
+
+.add-to-wishlist-btn:active {
+    transform: scale(1);
+}
+
+/* Wishlist Book Item */
+.wishlist-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.wishlist-list li {
+    background-color: #208085;
+    margin: 8px 0;
+    padding: 12px;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    transition: background-color 0.3s ease;
+}
+
+.wishlist-list li:hover {
+    background-color: rgb(10, 177, 171);
+}
+
+/* Book Image */
+.wishlist-list img {
+    width: 60px;
+    height: 90px;
+    border-radius: 4px;
+    object-fit: cover;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+}
+
+/* Book Details */
+.book-details {
+    text-align: left;
+    flex-grow: 1;
+}
+
+.book-title {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #f4b400;
+}
+
+.book-author {
+    font-size: 1rem;
+    color: #ccc;
+    margin-top: 2px;
+}
+
+/* Start Reading Button */
+.start-reading-btn {
+    margin-left: auto; /* Align button to the right */
+    padding: 6px 12px;
+    font-size: 1rem;
+    color: #fff;
+    background-color: #e0ca1f;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.start-reading-btn:hover {
+    background-color: #fcb606;
+    transform: scale(1.05);
+}
+
+.start-reading-btn:active {
+    transform: scale(1);
+}
+
+/* Footer */
+footer {
+    margin-top: 15px;
+    font-size: 0.75rem;
+    color: #aaa;
+}

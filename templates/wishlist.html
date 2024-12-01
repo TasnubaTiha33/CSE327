@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Wishlist</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/wishlist.css') }}">
+</head>
+<body>
+    {% include 'header.html' %}
+    
+    <!-- Flash Messages -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            <div class="flash-messages">
+                <ul>
+                    {% for category, message in messages %}
+                        <li class="flash {{ category }}">{{ message }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        {% endif %}
+    {% endwith %}
+
+    <div class="main-content">
+        <!-- Page Heading -->
+        <h1>My Wishlist</h1>
+
+        <!-- Wishlist Table -->
+        <table>
+            <thead>
+                <tr>
+                    <th>Book Name</th>
+                    <th>Writer's Name</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for book in wishlistBooks %}
+                <tr>
+                    <td>{{ book.bookName }}</td>
+                    <td>{{ book.writerName }}</td>
+                    <td>
+                        <!-- Button to Remove Book from Wishlist -->
+                        <button class="remove-book-button" data-book-id="{{ book.bookId }}" onclick="removeFromWishlist(this)">Remove</button>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <!-- Search/Add New Book Section -->
+        <div class="add-book-container">
+            <button class="add-to-wishlist-btn" onclick="toggleBookList()">Add to Wishlist</button>
+        </div>
+
+        <!-- Add to Wishlist Section (Initially Hidden) -->
+        <section class="add-to-wishlist-section" id="add-to-wishlist-section">
+            <h3>Select a Book to Add to Wishlist</h3>
+
+            <!-- Search input for books -->
+            <input type="text" id="book-search" placeholder="Search by book name" class="search-input">
+
+            <!-- Suggestions for books -->
+            <ul id="suggestions"></ul>
+
+            <!-- List of available books (to be shown if no search is done) -->
+            <ul id="book-list" style="display:none">
+                {% for book in availableBooks %}
+                    <li>
+                        <label>
+                            <input type="radio" name="bookId" value="{{ book.bookId }}">
+                            {{ book.bookName }} by {{ book.writerName }}
+                        </label>
+                    </li>
+                {% endfor %}
+            </ul>
+
+            <!-- Add Book Button -->
+            <button class="add-book-btn" onclick="addBookToWishlist()">Add Book</button>
+        </section>
+    </div>
+
+    <script>
+        // Function to toggle the visibility of the add-to-wishlist section
+        function toggleBookList() {
+            var section = document.getElementById('add-to-wishlist-section');
+            section.classList.toggle('visible');
+        }
+
+        // Function to handle search input and display suggestions
+        document.getElementById('book-search').addEventListener('input', function(event) {
+            let query = event.target.value;
+
+            // Only make the request if the query is at least 3 characters long
+            if (query.length >= 3) {
+                fetch(`/search_books?query=${query}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        const suggestionsList = document.getElementById('suggestions');
+                        suggestionsList.innerHTML = ''; // Clear previous suggestions
+
+                        if (data.books.length > 0) {
+                            data.books.forEach(book => {
+                                const li = document.createElement('li');
+                                li.textContent = book.name + " by " + book.writer;
+                                li.dataset.bookId = book.id;
+                                li.addEventListener('click', function() {
+                                    // When a suggestion is clicked, fill the search box
+                                    document.getElementById('book-search').value = book.name;
+                                    suggestionsList.innerHTML = ''; // Clear suggestions
+                                    addToWishlist(book.id);
+                                });
+                                suggestionsList.appendChild(li);
+                            });
+                        }
+                    })
+                    .catch(error => console.error('Error fetching book suggestions:', error));
+            } else {
+                // If query is less than 3 characters, clear suggestions
+                document.getElementById('suggestions').innerHTML = '';
+            }
+        });
+
+        // Function to add the selected book to the wishlist
+        function addToWishlist(bookId) {
+            fetch('/wishlist', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ bookId: bookId })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.status === 'success') {
+                    alert('Book added to wishlist!');
+                    location.reload();  // Reload to update the wishlist
+                } else {
+                    alert('Failed to add the book to wishlist.');
+                }
+            })
+            .catch(error => console.error('Error adding book to wishlist:', error));
+        }
+
+        // Function to handle adding a book to the wishlist by selecting from the book list
+        function addBookToWishlist() {
+            var selectedBookId = document.querySelector('input[name="bookId"]:checked');
+            if (selectedBookId) {
+                var bookId = selectedBookId.value;
+                alert("Book with ID " + bookId + " added to your wishlist!");
+            } else {
+                alert("Please select a book first.");
+            }
+        }
+
+        // Function to remove a book from the wishlist
+        function removeFromWishlist(button) {
+            var bookId = button.getAttribute('data-book-id');
+            fetch('/remove_from_wishlist', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ bookId: bookId })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.status === "success") {
+                    alert('Book removed from wishlist.');
+                    button.closest('tr').remove();  // Remove the row from the table
+                } else {
+                    alert('Failed to remove book from wishlist.');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('An error occurred while removing the book.');
+            });
+        }
+    </script>
+
+</body>
+</html>

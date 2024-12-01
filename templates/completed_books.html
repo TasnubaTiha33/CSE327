@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Completed Books</title>
+    <!-- Link to stylesheets -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/header.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/completed_books.css') }}">
+</head>
+<body>
+    <!-- Header with Navigation -->
+    <header class="header">
+        <nav class="navbar">
+            <ul>
+                <li><a href="{{ url_for('home') }}">Home</a></li>
+                <li><a href="{{ url_for('bookList') }}">Book List</a></li>
+                <li><a href="{{ url_for('readingStatus') }}">Reading Status</a></li>
+                <li><a href="{{ url_for('completedBooks') }}">Completed Books</a></li>
+                <li><a href="{{ url_for('wishlist') }}">Wishlist</a></li>
+                <li><a href="{{ url_for('logout') }}">Logout</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <div class="container">
+        <h1>Completed Books</h1>
+        <h2>Your Journey Through the Pages</h2>
+
+        <!-- If no books are completed, show a message -->
+        {% if completedBooks %}
+        <div class="card">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Book Title</th>
+                        <th>Author</th>
+                        <th>Genre</th>
+                        <th>Rating</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for book in completedBooks %}
+                    <tr>
+                        <td>{{ book.bookName }}</td>
+                        <td>{{ book.writerName }}</td>
+                        <td>{{ book.genre }}</td>
+                        <td>{{ book.rating or 'Not Rated' }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        {% else %}
+        <p>No books completed yet. Start reading and mark your progress!</p>
+        {% endif %}
+    </div>
+</body>
+</html>
