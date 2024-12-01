@@ -15,10 +15,6 @@
 
 The following tools and technologies were used to build **BookVault**:
 
-## Tech Stack
-
-The following tools and technologies were used to build **BookVault**:
-
 - **Base Language**:
   - ![Python](https://img.icons8.com/color/50/000000/python.png) [Python](https://www.python.org/) - The primary programming language used for developing the backend of the application.
 
