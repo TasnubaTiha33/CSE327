@@ -20,15 +20,6 @@ Here are the tools used in the development of **Book Vault**:
 - **Python** ![Python](https://img.shields.io/badge/Python-%23347829?style=for-the-badge&logo=python&logoColor=white)
 - **Git** ![Git](https://img.shields.io/badge/Git-%23f14e32?style=for-the-badge&logo=git&logoColor=white)
 
-
-## Features
-
-- Users can browse and read books.
-- Users can add new books to their collection.
-- Users can track their reading progress.
-- Users can rate and leave reviews on books.
-- Users can share books with others.
-
 ## Technologies Used
 
 - **Flask** for web development
