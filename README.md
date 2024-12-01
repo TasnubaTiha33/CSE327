@@ -52,9 +52,10 @@ This project was developed by:
 
 To get started with **BookVault**, follow these steps:
 
-1. ### Clone the repository:
+ ### 1. Clone the repository:
    ```bash
    git clone https://github.com/TasnubaTiha33/CSE327.git
+```
 
 ## Setup Instructions
 
