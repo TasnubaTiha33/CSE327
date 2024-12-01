@@ -66,10 +66,12 @@ Navigate to the project directory and run the following command to install the r
 
 ```bash
 pip install -r requirements.txt
-
-### 4. Run the Application
+```
+### 3. Run the Application
 
 After setting up the database, run the Flask application with the following command:
 
 ```bash
 python app.py
+```
+This will start the Flask development server. Once the server is running, you can access the application by visiting [http://127.0.0.1:5000](http://127.0.0.1:5000) in your web browser.
