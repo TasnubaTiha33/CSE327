@@ -1,0 +1,219 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>app.controllers &mdash; CSE327 1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=29a6c3e3"></script>
+      <script src="../../_static/doctools.js?v=9a2dae69"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            CSE327
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../modules.html">CSE327</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">CSE327</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Module code</a></li>
+          <li class="breadcrumb-item"><a href="../app.html">app</a></li>
+      <li class="breadcrumb-item active">app.controllers</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for app.controllers</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">flask</span> <span class="kn">import</span> <span class="n">Blueprint</span><span class="p">,</span> <span class="n">render_template</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">redirect</span><span class="p">,</span> <span class="n">url_for</span><span class="p">,</span> <span class="n">flash</span><span class="p">,</span> <span class="n">jsonify</span>
+<span class="kn">from</span> <span class="nn">flask_login</span> <span class="kn">import</span> <span class="n">login_user</span><span class="p">,</span> <span class="n">logout_user</span><span class="p">,</span> <span class="n">login_required</span><span class="p">,</span> <span class="n">current_user</span>
+<span class="kn">from</span> <span class="nn">werkzeug.security</span> <span class="kn">import</span> <span class="n">generate_password_hash</span><span class="p">,</span> <span class="n">check_password_hash</span>
+<span class="kn">from</span> <span class="nn">.models</span> <span class="kn">import</span> <span class="n">db</span><span class="p">,</span> <span class="n">User</span><span class="p">,</span> <span class="n">BookList</span><span class="p">,</span> <span class="n">UserBooks</span>
+<span class="kn">from</span> <span class="nn">sqlalchemy.sql</span> <span class="kn">import</span> <span class="n">text</span>
+<span class="kn">from</span> <span class="nn">flask</span> <span class="kn">import</span> <span class="n">render_template</span>
+
+<span class="n">routes</span> <span class="o">=</span> <span class="n">Blueprint</span><span class="p">(</span><span class="s1">&#39;routes&#39;</span><span class="p">,</span> <span class="vm">__name__</span><span class="p">,</span> <span class="n">template_folder</span><span class="o">=</span><span class="s1">&#39;views&#39;</span><span class="p">)</span>
+
+
+
+<span class="c1"># &quot;&quot;&quot;</span>
+<span class="c1"># Reading Status</span>
+<span class="c1"># ------------------------------------------------</span>
+<span class="c1"># In this page user can go to add book page. Also user can </span>
+<span class="c1"># check and update the progress of books he/she is currently reading </span>
+<span class="c1"># &quot;&quot;&quot;</span>
+<div class="viewcode-block" id="readingStatus">
+<a class="viewcode-back" href="../../app.html#app.controllers.readingStatus">[docs]</a>
+<span class="nd">@routes</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">&#39;/reading_status&#39;</span><span class="p">)</span>
+<span class="nd">@login_required</span>
+<span class="k">def</span> <span class="nf">readingStatus</span><span class="p">():</span>
+    <span class="c1"># Query to fetch books the user is reading and exclude completed (100%) books</span>
+    <span class="n">books</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span>
+        <span class="n">text</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">            SELECT </span>
+<span class="s2">                ub.user_book_id,</span>
+<span class="s2">                b.book_name, </span>
+<span class="s2">                b.writer_name, </span>
+<span class="s2">                ub.reading_progress, </span>
+<span class="s2">                ub.completed</span>
+<span class="s2">            FROM user_books ub</span>
+<span class="s2">            JOIN book_list b ON ub.book_id = b.book_id</span>
+<span class="s2">            WHERE ub.user_id = :user_id AND ub.reading_progress &lt; 100</span>
+<span class="s2">        &quot;&quot;&quot;</span><span class="p">),</span>
+        <span class="p">{</span><span class="s2">&quot;user_id&quot;</span><span class="p">:</span> <span class="n">current_user</span><span class="o">.</span><span class="n">user_id</span><span class="p">}</span>
+    <span class="p">)</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()</span>
+
+    <span class="c1"># Convert the result into a format suitable for rendering in HTML</span>
+    <span class="n">user_books</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="p">{</span>
+            <span class="s2">&quot;user_book_id&quot;</span><span class="p">:</span> <span class="n">book</span><span class="o">.</span><span class="n">user_book_id</span><span class="p">,</span>
+            <span class="s2">&quot;book_name&quot;</span><span class="p">:</span> <span class="n">book</span><span class="o">.</span><span class="n">book_name</span><span class="p">,</span>
+            <span class="s2">&quot;writer_name&quot;</span><span class="p">:</span> <span class="n">book</span><span class="o">.</span><span class="n">writer_name</span><span class="p">,</span>
+            <span class="s2">&quot;reading_progress&quot;</span><span class="p">:</span> <span class="n">book</span><span class="o">.</span><span class="n">reading_progress</span><span class="p">,</span>
+            <span class="s2">&quot;completed&quot;</span><span class="p">:</span> <span class="n">book</span><span class="o">.</span><span class="n">completed</span>
+        <span class="p">}</span>
+        <span class="k">for</span> <span class="n">book</span> <span class="ow">in</span> <span class="n">books</span>
+    <span class="p">]</span>
+
+    <span class="k">return</span> <span class="n">render_template</span><span class="p">(</span><span class="s1">&#39;reading_status.html&#39;</span><span class="p">,</span> <span class="n">user_books</span><span class="o">=</span><span class="n">user_books</span><span class="p">)</span></div>
+
+
+<span class="c1"># &quot;&quot;&quot;</span>
+<span class="c1"># Save Progress</span>
+<span class="c1"># ------------------------------------------------</span>
+<span class="c1"># It is a part of the Reading Status page. Here, the user </span>
+<span class="c1"># can save the progress of his currently reading books.</span>
+<span class="c1"># &quot;&quot;&quot;</span>
+<div class="viewcode-block" id="saveProgress">
+<a class="viewcode-back" href="../../app.html#app.controllers.saveProgress">[docs]</a>
+<span class="nd">@routes</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">&#39;/save_progress&#39;</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;POST&#39;</span><span class="p">])</span>
+<span class="nd">@login_required</span>
+<span class="k">def</span> <span class="nf">saveProgress</span><span class="p">():</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">get_json</span><span class="p">()</span>
+    <span class="n">progresses</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;progresses&#39;</span><span class="p">,</span> <span class="p">[])</span>
+
+    <span class="k">try</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">progress</span> <span class="ow">in</span> <span class="n">progresses</span><span class="p">:</span>
+            <span class="n">db</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span>
+                <span class="n">text</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">                    UPDATE user_books</span>
+<span class="s2">                    SET reading_progress = :progress, completed = :completed</span>
+<span class="s2">                    WHERE user_book_id = :book_id AND user_id = :user_id</span>
+<span class="s2">                &quot;&quot;&quot;</span><span class="p">),</span>
+                <span class="p">{</span>
+                    <span class="s2">&quot;progress&quot;</span><span class="p">:</span> <span class="n">progress</span><span class="p">[</span><span class="s1">&#39;progress&#39;</span><span class="p">],</span>
+                    <span class="s2">&quot;completed&quot;</span><span class="p">:</span> <span class="n">progress</span><span class="p">[</span><span class="s1">&#39;progress&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;100&#39;</span><span class="p">,</span>
+                    <span class="s2">&quot;book_id&quot;</span><span class="p">:</span> <span class="n">progress</span><span class="p">[</span><span class="s1">&#39;book_id&#39;</span><span class="p">],</span>
+                    <span class="s2">&quot;user_id&quot;</span><span class="p">:</span> <span class="n">current_user</span><span class="o">.</span><span class="n">user_id</span>
+                <span class="p">}</span>
+            <span class="p">)</span>
+        <span class="n">db</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">jsonify</span><span class="p">({</span><span class="s2">&quot;status&quot;</span><span class="p">:</span> <span class="s2">&quot;success&quot;</span><span class="p">})</span>
+    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="n">db</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">rollback</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">jsonify</span><span class="p">({</span><span class="s2">&quot;status&quot;</span><span class="p">:</span> <span class="s2">&quot;error&quot;</span><span class="p">,</span> <span class="s2">&quot;message&quot;</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">)}),</span> <span class="mi">500</span></div>
+
+
+<span class="c1"># &quot;&quot;&quot;</span>
+<span class="c1"># Complete Book</span>
+<span class="c1"># ------------------------------------------------</span>
+<span class="c1"># It is also a part of the Reading Status page. So, if the user clicks on save Progress </span>
+<span class="c1"># where the progress of a book is 100 percent then the user has completed the particular book. </span>
+<span class="c1"># As a result, it will be marked as completed in our database and we can not </span>
+<span class="c1"># see the book in the reading progress.</span>
+<span class="c1"># &quot;&quot;&quot;</span>
+<div class="viewcode-block" id="completeBook">
+<a class="viewcode-back" href="../../app.html#app.controllers.completeBook">[docs]</a>
+<span class="nd">@routes</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">&#39;/complete_book/&lt;int:book_id&gt;&#39;</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;POST&#39;</span><span class="p">])</span>
+<span class="nd">@login_required</span>
+<span class="k">def</span> <span class="nf">completeBook</span><span class="p">(</span><span class="n">book_id</span><span class="p">):</span>
+    <span class="c1"># Mark the book as completed</span>
+    <span class="n">db</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span>
+        <span class="n">text</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">            UPDATE user_books</span>
+<span class="s2">            SET completed = TRUE, reading_progress = 100</span>
+<span class="s2">            WHERE user_book_id = :book_id AND user_id = :user_id</span>
+<span class="s2">        &quot;&quot;&quot;</span><span class="p">),</span>
+        <span class="p">{</span><span class="s2">&quot;book_id&quot;</span><span class="p">:</span> <span class="n">book_id</span><span class="p">,</span> <span class="s2">&quot;user_id&quot;</span><span class="p">:</span> <span class="n">current_user</span><span class="o">.</span><span class="n">user_id</span><span class="p">}</span>
+    <span class="p">)</span>
+    <span class="n">db</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+    <span class="n">flash</span><span class="p">(</span><span class="s2">&quot;Book marked as completed!&quot;</span><span class="p">,</span> <span class="n">category</span><span class="o">=</span><span class="s2">&quot;success&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;message&quot;</span><span class="p">:</span> <span class="s2">&quot;Book marked as completed&quot;</span><span class="p">},</span> <span class="mi">200</span></div>
+
+
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Fiaz Al Abid.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
