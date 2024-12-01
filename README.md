@@ -20,20 +20,20 @@ The following tools and technologies were used to build **BookVault**:
 The following tools and technologies were used to build **BookVault**:
 
 - **Base Language**:
-  - ![Python](https://img.icons8.com/ios/50/000000/python.png) [Python](https://www.python.org/) - The primary programming language used for developing the backend of the application.
+  - ![Python](https://img.icons8.com/color/50/000000/python.png) [Python](https://www.python.org/) - The primary programming language used for developing the backend of the application.
 
 - **Backend**:
-  - ![Flask](https://img.icons8.com/ios/50/000000/flask.png) [Flask](https://flask.palletsprojects.com/) - Lightweight web framework for Python.
-  - ![MySQL](https://img.icons8.com/ios/50/000000/mysql-logo.png) [MySQL](https://www.mysql.com/) - Database for storing books, user information, reviews, and ratings.
-  - ![SQLAlchemy](https://img.icons8.com/ios/50/000000/sqlalchemy.png) [SQLAlchemy](https://www.sqlalchemy.org/) - ORM for database interactions in Flask.
+  - ![Flask](https://img.icons8.com/color/50/000000/flask.png) [Flask](https://flask.palletsprojects.com/) - Lightweight web framework for Python.
+  - ![MySQL](https://img.icons8.com/color/50/000000/mysql-logo.png) [MySQL](https://www.mysql.com/) - Database for storing books, user information, reviews, and ratings.
+  - ![SQLAlchemy](https://img.icons8.com/color/50/000000/sqlalchemy.png) [SQLAlchemy](https://www.sqlalchemy.org/) - ORM for database interactions in Flask.
 
 - **Frontend**:
-  - ![HTML](https://img.icons8.com/ios/50/000000/html-5.png) [HTML](https://html.com/) - Standard markup language for creating web pages.
-  - ![CSS](https://img.icons8.com/ios/50/000000/css3.png) [CSS](https://www.w3.org/Style/CSS/) - Styling language for the design of web pages.
+  - ![HTML](https://img.icons8.com/color/50/000000/html-5.png) [HTML](https://html.com/) - Standard markup language for creating web pages.
+  - ![CSS](https://img.icons8.com/color/50/000000/css3.png) [CSS](https://www.w3.org/Style/CSS/) - Styling language for the design of web pages.
 
 - **Libraries/Tools**:
-  - ![Git](https://img.icons8.com/ios/50/000000/git.png) [Git](https://git-scm.com/) - Version control system for managing project source code.
-  - ![GitHub](https://img.icons8.com/ios/50/000000/github.png) [GitHub](https://github.com/) - Git repository hosting service.
+  - ![Git](https://img.icons8.com/color/50/000000/git.png) [Git](https://git-scm.com/) - Version control system for managing project source code.
+  - ![GitHub](https://img.icons8.com/color/50/000000/github.png) [GitHub](https://github.com/) - Git repository hosting service.
 
 
 
