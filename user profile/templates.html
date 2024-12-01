@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+<div class="container">
+    <h1>Your Profile</h1>
+
+    <!-- Flash messages -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                <div class="flash-message {{ category }}">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+
+    <!-- Display Added Books -->
+    <section>
+        <h2>Added Books</h2>
+        {% if added_books %}
+            <ul>
+                {% for book in added_books %}
+                    <li>
+                        <div>
+                            <span>{{ book.book_name }}</span> by 
+                            <span class="writer_name">{{ book.writer_name }}</span>
+                        </div>
+                        <form action="{{ url_for('shareBook', book_id=book.book_id) }}" method="POST">
+                            <button type="submit">Share</button>
+                        </form>
+                        <form action="{{ url_for('removeBook', book_id=book.book_id) }}" method="POST">
+                            <button type="submit">Remove</button>
+                        </form>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>No added books yet.</p>
+        {% endif %}
+    </section>
+
+    <!-- Display Removed Books -->
+    <section>
+        <h2>Removed Books</h2>
+        {% if removed_books %}
+            <ul>
+                {% for book in removed_books %}
+                    <li>{{ book.book_name }} by {{ book.writer_name }}</li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>No removed books.</p>
+        {% endif %}
+    </section>
+
+    <!-- Display Shared Books -->
+    <section>
+        <h2>Shared Books</h2>
+        {% if shared_books %}
+            <ul>
+                {% for book in shared_books %}
+                    <li>{{ book.book_name }} by {{ book.writer_name }}</li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>No shared books.</p>
+        {% endif %}
+    </section>
+
+</div>
+
+</body>
+</html>
