@@ -52,7 +52,7 @@ This project was developed by:
 
 To get started with **BookVault**, follow these steps:
 
-1. **Clone the repository**:
+1. Clone the repository:
    ```bash
    git clone https://github.com/TasnubaTiha33/CSE327.git
 
@@ -60,14 +60,14 @@ To get started with **BookVault**, follow these steps:
 
 To get started with **BookVault**, follow these steps:
 
-### 2. Install Dependencies
+### 1. Install Dependencies
 
 Navigate to the project directory and run the following command to install the required Python packages:
 
 ```bash
 pip install -r requirements.txt
 ```
-### 3. Run the Application
+### 2. Run the Application
 
 After setting up the database, run the Flask application with the following command:
 
