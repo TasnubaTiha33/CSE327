@@ -69,22 +69,6 @@ pip install -r requirements.txt
 
 ### 3. Set Up Database
 
-1. **Configure your MySQL database** with the necessary tables for your application.
-
-2. **Update the database credentials** in the `config.py` file:
-   - Set the correct **host** for your MySQL server.
-   - Enter your **username** and **password** for database authentication.
-   - Specify the **database name** you want to use for the project.
-
-Example:
-
-```python
-class Config:
-    DB_HOST = 'localhost'  # Host for the MySQL server
-    DB_USER = 'your_username'  # MySQL username
-    DB_PASSWORD = 'your_password'  # MySQL password
-    DB_NAME = 'bookvault_db'  # Database name
-
 ### 4. Run the Application
 
 After setting up the database, run the Flask application with the following command:
