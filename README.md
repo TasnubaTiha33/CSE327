@@ -66,3 +66,10 @@ Navigate to the project directory and run the following command to install the r
 
 ```bash
 pip install -r requirements.txt
+
+### 4. Run the Application
+
+After setting up the database, run the Flask application with the following command:
+
+```bash
+python app.py
