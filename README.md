@@ -23,7 +23,7 @@ The following tools and technologies were used to build **BookVault**:
   - ![Python](https://img.icons8.com/color/50/000000/python.png) [Python](https://www.python.org/) - The primary programming language used for developing the backend of the application.
 
 - **Backend**:
-  - ![Flask](https://img.icons8.com/color/50/000000/flask.png) [Flask](https://flask.palletsprojects.com/) - Lightweight web framework for Python.
+  - ![Flask](https://flask.palletsprojects.com/en/stable/_static/flask-logo.svg) [Flask](https://flask.palletsprojects.com/en/stable/) - Lightweight web framework for Python.
   - ![MySQL](https://img.icons8.com/color/50/000000/mysql-logo.png) [MySQL](https://www.mysql.com/) - Database for storing books, user information, reviews, and ratings.
   - ![SQLAlchemy](https://www.sqlalchemy.org/favicon.ico) [SQLAlchemy](https://www.sqlalchemy.org/) - ORM for database interactions in Flask.
 
