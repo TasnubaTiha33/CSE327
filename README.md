@@ -15,17 +15,22 @@
 
 The following tools and technologies were used to build **BookVault**:
 
+- **Base Language**:
+  - ![Python](https://upload.wikimedia.org/wikipedia/commons/c/c3/Python-logo-notext.svg) [Python](https://www.python.org/) - The primary programming language used for developing the backend of the application.
+
 - **Backend**: 
-  - [Flask](https://flask.palletsprojects.com/) - Lightweight web framework for Python
-  - [MySQL](https://www.mysql.com/) - Database for storing books, user information, reviews, and ratings.
-  - [SQLAlchemy](https://www.sqlalchemy.org/) - ORM for database interactions in Flask.
+  - ![Flask](https://upload.wikimedia.org/wikipedia/commons/thumb/0/0e/Flask_logo.svg/1024px-Flask_logo.svg.png) [Flask](https://flask.palletsprojects.com/) - Lightweight web framework for Python
+  - ![MySQL](https://upload.wikimedia.org/wikipedia/commons/thumb/d/d3/MySQL_logo.svg/800px-MySQL_logo.svg.png) [MySQL](https://www.mysql.com/) - Database for storing books, user information, reviews, and ratings.
+  - ![SQLAlchemy](https://upload.wikimedia.org/wikipedia/commons/thumb/8/8f/SQLAlchemy_logo.png/600px-SQLAlchemy_logo.png) [SQLAlchemy](https://www.sqlalchemy.org/) - ORM for database interactions in Flask.
+
 - **Frontend**:
-  - [HTML](https://html.com/) - Standard markup language for creating web pages.
-  - [CSS](https://www.w3.org/Style/CSS/) - Styling language for the design of web pages.
-  - 
+  - ![HTML](https://upload.wikimedia.org/wikipedia/commons/7/77/HTML5_logo.svg) [HTML](https://html.com/) - Standard markup language for creating web pages.
+  - ![CSS](https://upload.wikimedia.org/wikipedia/commons/6/62/CSS3_logo.svg) [CSS](https://www.w3.org/Style/CSS/) - Styling language for the design of web pages.
+
 - **Libraries/Tools**:
-  - [Git](https://git-scm.com/) - Version control system for managing project source code.
-  - [GitHub](https://github.com/) - Git repository hosting service.
+  - ![Git](https://git-scm.com/images/logos/downloads/Git-Logo-2X.png) [Git](https://git-scm.com/) - Version control system for managing project source code.
+  - ![GitHub](https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/Octicons-mark-github.svg/120px-Octicons-mark-github.svg.png) [GitHub](https://github.com/) - Git repository hosting service.
+
 
 ## Authors
 
