@@ -1,0 +1,170 @@
+/* Body styling */
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-image: url('/static/images/Library.jpg'); /* Correct path */
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    color: #3e3e3e;
+}
+
+/* Quote styling */
+.quote {
+    position: absolute;
+    bottom: 10%; /* Distance from the bottom, adjust as needed */
+    left: 50%; /* To center horizontally */
+    transform: translateX(-50%); /* Centers the quote */
+    font-size: 18px;
+    color: #ffffff;
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background for better visibility */
+    padding: 10px;
+    border-radius: 5px;
+    font-style: italic;
+    font-weight: bold;
+    text-align: center;
+    white-space: nowrap; /* Prevents the text from wrapping into a new line */
+    max-width: 90%; /* Ensures the text doesn't overflow */
+    overflow: hidden; /* Hides any overflowed text */
+    text-overflow: ellipsis; /* Adds '...' if the text overflows */
+}
+
+
+nav ul {
+    list-style: none;
+    display: flex;
+    margin: 0;
+    padding: 0;
+}
+
+nav ul li {
+    margin: 0 15px; /* Space out the buttons */
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: #ffffff; /* White text color */
+    font-weight: bold;
+    font-size: 16px;
+    padding-bottom: 5px; /* Space for underline */
+    position: relative; /* For positioning the underline */
+    transition: color 0.3s ease, padding-bottom 0.3s ease; /* Smooth color and padding transition */
+}
+
+/* Hover effect (subtle color change and underline expansion) */
+nav ul li a:hover {
+    color: #ff476f; /* Change text color on hover */
+}
+
+/* Active (clicked) effect (underline) */
+nav ul li a:active {
+    color: #ff476f; /* Keep the color same on click */
+}
+
+/* Underline effect using pseudo-element */
+nav ul li a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0%; /* Start with no underline */
+    height: 2px;
+    background-color: #ff476f; /* Underline color */
+    transition: width 0.3s ease; /* Smooth width transition */
+}
+
+/* On hover and active, the underline expands */
+nav ul li a:hover::after,
+nav ul li a:active::after {
+    width: 100%; /* Expand the underline to full width */
+}
+
+/* Main content styling */
+.main-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: calc(100vh - 60px); /* Adjusting for header */
+    text-align: center;
+    color: #fff;
+    position: relative;
+    padding: 40px;
+}
+
+/* Adding a background overlay to ensure text visibility */
+.main-content::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.4); /* Semi-transparent dark overlay */
+    z-index: -1; /* Ensures the overlay is behind the text */
+    border-radius: 10px;
+}
+
+/* Heading (Welcome to BookVault) styling */
+.main-content h2 {
+    font-size: 48px;
+    font-weight: bold;
+    color: #ff476f; /* Tomato color */
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5); /* Shadow for better visibility */
+    margin-bottom: 20px;
+}
+
+.main-content p {
+    font-size: 18px;
+    max-width: 600px;
+    margin: 0 auto;
+    line-height: 1.6;
+    color: #fff;
+}
+
+  
+  /* Flash Messages Styling */
+  .flash-messages {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    position: absolute;
+    top: 80px; /* Adjust as needed based on the navbar height */
+    left: 0;
+    z-index: 10;
+    animation: fadeOut 5s forwards; /* Fade out after 3 seconds */
+  }
+  
+  .flash {
+    padding: 10px 20px;
+    border-radius: 8px;
+    margin: 10px;
+    font-weight: bold;
+    font-size: 16px;
+    color: #fff;
+    background-color: rgba(0, 0, 0, 0.7); /* Dark semi-transparent background */
+    opacity: 1;
+    text-align: center;
+    max-width: 80%; /* Limits width for readability */
+  }
+  
+  /* Success, Error, and Info styles */
+  .flash.success { background-color: #4caf50; } /* Green */
+  .flash.error { background-color: #f44336; } /* Red */
+  .flash.info { background-color: #2196f3; } /* Blue */
+  
+  /* Fade-out Animation */
+  @keyframes fadeOut {
+    0% { opacity: 1; }
+    80% { opacity: 1; }
+    100% { opacity: 0; visibility: hidden; }
+  }
+  
+
+

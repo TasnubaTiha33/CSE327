@@ -1,0 +1,132 @@
+/* Body styling */
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-image: url('/static/images/Library.jpg'); /* Correct path */
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #3e3e3e;
+}
+
+/* Form container styling */
+.login-container {
+    background-color: rgba(255, 245, 235, 0.9);
+    border-radius: 10px;
+    padding: 30px;
+    width: 350px;
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+    text-align: center;
+}
+
+.login-container h1 {
+    font-size: 24px;
+    color: #4e4e4e;
+    margin-bottom: 20px;
+}
+
+/* Input field styling */
+.login-container input[type="text"],
+.login-container input[type="email"],
+.login-container input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+    font-size: 14px;
+}
+
+/* Button styling */
+.login-container button {
+    width: 100%;
+    padding: 10px;
+    background-color: #ff476f; /* Apply the new color here */
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+.login-container button:hover {
+    background-color: #ff3f5f; /* Slightly darker shade for hover */
+}
+
+/* Style for the redirect message */
+.login-redirect {
+    text-align: center;
+    margin-top: 10px;
+    font-size: 14px;
+    color: #5e5e5e;
+}
+
+/* Style for the signup link */
+.login-redirect .signup-link {
+    color: #ff3f5f; /* A subtle blue shade for the link */
+    text-decoration: none;
+    font-weight: bold;
+    margin-left: 5px;
+}
+
+.flash-messages {
+    position: absolute;
+    top: 130px; /* Positioning above the form */
+    left: 50%;
+    transform: translateX(-50%);
+    width: 30%; /* Adjust width as necessary */
+    text-align: center;
+    animation: fadeOut 5s forwards; /* Apply fade-out animation */
+    z-index: 10;
+}
+
+.flash-messages ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.flash {
+    padding: 10px 15px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    text-align: center;
+    font-weight: bold;
+    color: #fff;
+    font-size: 16px;
+    opacity: 1;
+    transition: opacity 0.5s ease;
+    
+}
+
+/* Success, Error, Warning, and Info colors */
+.flash.success {
+    background-color: #4caf50; /* Green for success */
+}
+
+.flash.error {
+    background-color: #f44336; /* Red for error */
+}
+
+.flash.warning {
+    background-color: #ff9800; /* Orange for warning */
+}
+
+.flash.info {
+    background-color: #2196f3; /* Blue for info */
+}
+
+/* Fade-out Animation */
+@keyframes fadeOut {
+    0% { opacity: 1; }
+    80% { opacity: 1; }
+    100% { opacity: 0; visibility: hidden; }
+}
