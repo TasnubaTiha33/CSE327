@@ -1,0 +1,19 @@
+<!-- Display Shared Books -->
+<section>
+    <h2>Shared Books</h2>
+    {% if shared_books %}
+        <ul>
+        {% for book in shared_books %}
+            <li>
+                <div>
+                    <span>{{ book.book_name }}</span> by 
+                    <span class="writer_name">{{ book.writer_name }}</span>
+                </div>
+                <p>Shared with: {{ book.username }}</p>
+            </li>
+        {% endfor %}
+        </ul>
+    {% else %}
+        <p>No shared books.</p>
+    {% endif %}
+</section>
