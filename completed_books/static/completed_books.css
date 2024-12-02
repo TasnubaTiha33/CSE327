@@ -1,0 +1,146 @@
+/* General Reset */
+body, html {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Arial', sans-serif;
+    height: 100%; /* Ensure full height for centering */
+}
+
+/* Background Styling */
+body {
+    background-image: url('/static/images/Background\ image.jpg');
+
+    background-size: cover;
+    background-attachment: fixed;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+/* General Header Styling */
+header {
+    background-color: rgba(0, 0, 0, 0.8); 
+    padding: 15px 0;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+    width: 100%;
+    position: fixed;
+    top: 0;
+    z-index: 1000;
+}
+
+/* Navbar Styling */
+.navbar ul {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.navbar ul li {
+    margin: 0 20px;
+    position: relative;
+}
+
+.navbar ul li a {
+    text-decoration: none;
+    color: white;
+    font-weight: 500;
+    text-transform: uppercase;
+    transition: color 0.3s ease;
+}
+
+.navbar ul li a:hover, .navbar ul li a:focus {
+    color: #ccc;
+    text-decoration: underline;
+}
+
+/* Subtitle Styling */
+.subtitle {
+    text-align: center;
+    font-size: 1rem;
+    color: #fff;
+    margin-bottom: 1rem;
+}
+
+/* Container Styling */
+.container {
+    text-align: center;
+    padding: 20px;
+    background-color: rgba(0, 0, 0, 0.85);
+    max-width: 800px;
+    margin: 120px 20px 40px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+}
+
+/* Card Styling */
+.card {
+    margin: 0 auto;
+    display: inline-block;
+}
+
+/* Table Styling */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: center;
+}
+
+th, td {
+    padding: 15px;
+    border-bottom: 2px solid #555;
+}
+
+th {
+    background-color: #444;
+    color: white;
+}
+
+td {
+    background-color: #333;
+    color: white;
+}
+
+tbody tr:hover td {
+    background-color: #555;
+}
+
+/* Header Styling */
+h1 {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+}
+
+h2 {
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+    color: #ddd;
+}
+
+/* Footer */
+footer {
+    margin-top: 20px;
+    font-size: 0.9rem;
+    color: #aaa;
+}
+
+/* Responsive Design - Mobile */
+@media (max-width: 768px) {
+    .navbar ul {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .navbar ul li {
+        margin: 10px 0;
+    }
+
+    .container {
+        margin: 100px 10px;
+    }
+}
