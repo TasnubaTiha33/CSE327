@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rate Book</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <h1>Rate "{{ book.title }}" by {{ book.author }}</h1>
+
+    <!-- Display success message -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            <ul>
+                {% for category, message in messages %}
+                    <li class="flash {{ category }}">{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    {% endwith %}
+
+    <form method="POST">
+        <label for="rating">Rating (1 to 5):</label>
+        <input type="number" id="rating" name="rating" min="1" max="5" required>
+
+        <label for="review">Review:</label>
+        <textarea id="review" name="review" rows="4" cols="50"></textarea>
+
+        <button type="submit">Submit Rating</button>
+    </form>
+</body>
+</html>
