@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/header.css') }}">
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <nav>
+                <ul>
+                    <li><a href="{{ url_for('home') }}">Home</a></li>
+                    <li><a href="{{ url_for('bookList') }}">Book List</a></li>
+                    <li><a href="{{ url_for('readingStatus') }}">Reading Status</a></li>
+                    <li><a href="{{ url_for('completedBooks') }}">Completed Books</a></li>
+                    <li><a href="{{ url_for('wishlist') }}">Wishlist</a></li>
+                    {% if current_user.is_authenticated %}
+                        <li><a href="#">{{ current_user.username }}</a></li>
+                        <li><a href="{{ url_for('logout') }}">Logout</a></li>
+                    {% else %}
+                        <li><a href="{{ url_for('login') }}">Login</a></li>
+                        <li><a href="{{ url_for('signup') }}">Sign Up</a></li>
+                    {% endif %}
+                </ul>
+            </nav>
+        </div>
+    </header>
+</body>
+</html>
