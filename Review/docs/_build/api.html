@@ -1,0 +1,258 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>API Documentation &mdash; BookVault 1.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=7ab3649f" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=f2a433a1"></script>
+      <script src="_static/doctools.js?v=9a2dae69"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Usage Instructions" href="usage.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            BookVault
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="setup.html">Installation Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="usage.html">Usage Instructions</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">API Documentation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#module-models">Module: <cite>models</cite></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#models.addReview"><code class="docutils literal notranslate"><span class="pre">addReview()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#models.deleteReview"><code class="docutils literal notranslate"><span class="pre">deleteReview()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#models.getDbConnection"><code class="docutils literal notranslate"><span class="pre">getDbConnection()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#models.getReviewById"><code class="docutils literal notranslate"><span class="pre">getReviewById()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#models.updateReview"><code class="docutils literal notranslate"><span class="pre">updateReview()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">BookVault</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">API Documentation</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/api.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="api-documentation">
+<h1>API Documentation<a class="headerlink" href="#api-documentation" title="Link to this heading"></a></h1>
+<section id="module-models">
+<h2>Module: <cite>models</cite><a class="headerlink" href="#module-models" title="Link to this heading"></a></h2>
+<p>This module contains the core functions for managing book reviews in the BookVault application.</p>
+<dl class="py function" id="module-0">
+<dt class="sig sig-object py" id="models.addReview">
+<span class="sig-prename descclassname"><span class="pre">models.</span></span><span class="sig-name descname"><span class="pre">addReview</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">bookTitle</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reviewerName</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">review</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rating</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/models.html#addReview"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#models.addReview" title="Link to this definition"></a></dt>
+<dd><p>Adds a new book review to the database after validating the review’s length.</p>
+<p>This function inserts a new review into the <cite>reviews</cite> table. It checks if the review
+exceeds a maximum length (1000 words), and if so, returns an error message. If the
+review passes validation, it inserts the review into the database.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>bookTitle</strong> (<em>str</em>) – The title of the book being reviewed.</p></li>
+<li><p><strong>reviewerName</strong> (<em>str</em>) – The name of the person submitting the review.</p></li>
+<li><p><strong>review</strong> (<em>str</em>) – The text content of the review.</p></li>
+<li><p><strong>rating</strong> (<em>int</em>) – The rating given to the book (usually between 1 and 5).</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A message indicating the result of the operation, either success or failure.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>mysql.connector.errors.InterfaceError</strong> – If the database connection fails.</p></li>
+<li><p><strong>mysql.connector.errors.ProgrammingError</strong> – If the SQL query is invalid.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="models.deleteReview">
+<span class="sig-prename descclassname"><span class="pre">models.</span></span><span class="sig-name descname"><span class="pre">deleteReview</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">reviewId</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/models.html#deleteReview"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#models.deleteReview" title="Link to this definition"></a></dt>
+<dd><p>Deletes a review from the database by its ID.</p>
+<p>This function removes a review from the <cite>reviews</cite> table based on the given review ID.
+It performs a DELETE operation on the database and commits the change.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>reviewId</strong> (<em>int</em>) – The unique identifier of the review to delete.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A message indicating the result of the operation, either success or failure.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>mysql.connector.errors.InterfaceError</strong> – If the database connection fails.</p></li>
+<li><p><strong>mysql.connector.errors.ProgrammingError</strong> – If the SQL query is invalid.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="models.getDbConnection">
+<span class="sig-prename descclassname"><span class="pre">models.</span></span><span class="sig-name descname"><span class="pre">getDbConnection</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/models.html#getDbConnection"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#models.getDbConnection" title="Link to this definition"></a></dt>
+<dd><p>Establishes a connection to the database using configuration values from the Flask app.</p>
+<p>This function uses the Flask <cite>current_app</cite> context to fetch database connection details
+(such as host, user, password, and database) from the app’s config. It returns a
+MySQL connection object that can be used for executing queries.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>A connection to the database.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>connection (mysql.connector.connection.MySQLConnection)</p>
+</dd>
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>mysql.connector.errors.ProgrammingError</strong> – If the database connection fails.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="models.getReviewById">
+<span class="sig-prename descclassname"><span class="pre">models.</span></span><span class="sig-name descname"><span class="pre">getReviewById</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">reviewId</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/models.html#getReviewById"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#models.getReviewById" title="Link to this definition"></a></dt>
+<dd><p>Fetches a review from the database by its ID.</p>
+<p>This function retrieves a review from the <cite>reviews</cite> table based on the given review ID.
+If the review exists, it returns a dictionary containing the review’s details. Otherwise,
+it returns None.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>reviewId</strong> (<em>int</em>) – The unique identifier of the review to fetch.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><dl class="simple">
+<dt>A dictionary containing the review details (id, book_title, review, rating),</dt><dd><p>or None if the review does not exist.</p>
+</dd>
+</dl>
+</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict or None</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>mysql.connector.errors.InterfaceError</strong> – If the database connection fails.</p></li>
+<li><p><strong>mysql.connector.errors.ProgrammingError</strong> – If the SQL query is invalid.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="models.updateReview">
+<span class="sig-prename descclassname"><span class="pre">models.</span></span><span class="sig-name descname"><span class="pre">updateReview</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">reviewId</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">review</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/models.html#updateReview"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#models.updateReview" title="Link to this definition"></a></dt>
+<dd><p>Updates an existing review in the database after validating the review’s length.</p>
+<p>This function updates an existing review in the <cite>reviews</cite> table. It checks if the new review
+text exceeds a maximum length (1000 words), and if so, returns an error message. If the review
+passes validation, it updates the review in the database.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>reviewId</strong> (<em>int</em>) – The unique identifier of the review to update.</p></li>
+<li><p><strong>review</strong> (<em>str</em>) – The updated review text.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A message indicating the result of the operation, either success or failure.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>mysql.connector.errors.InterfaceError</strong> – If the database connection fails.</p></li>
+<li><p><strong>mysql.connector.errors.ProgrammingError</strong> – If the SQL query is invalid.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="usage.html" class="btn btn-neutral float-left" title="Usage Instructions" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Tasnuba Islam.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
